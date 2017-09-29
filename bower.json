@@ -23,7 +23,5 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "^1.X.X",
-    "moment": "^2.X.X"
   }
 }
