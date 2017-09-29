@@ -1,1 +1,112 @@
-.text-center{text-align:center}.multiple-date-picker{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.multiple-date-picker,.picker-days-row,.picker-days-week-row,.picker-top-row{width:100%}.picker-top-row>div{display:inline-block}.picker-navigate{width:16.66%}.picker-navigate:hover{cursor:pointer}.picker-navigate.disabled,.picker-navigate.disabled:hover{color:#ddd;cursor:default}.picker-month{width:66.66%}.picker-days-row>div,.picker-days-week-row>div{width:14.28%;display:inline-block}.picker-day,.picker-top-row{padding:10px 0}.picker-day{background-color:#fff;border:1px solid #eee;box-sizing:border-box;color:#000}.picker-day.today,.picker-day.today.picker-off,.picker-day.today.picker-off:hover,.picker-day.today.picker-selected,.picker-day.today:hover{color:#00a3ff}.picker-day:not(.picker-off):not(.picker-empty):hover{background-color:#C6000B;color:#fff;cursor:pointer}.picker-day.picker-selected{background-color:#C6000B;color:#fff}.picker-day.picker-off,.picker-day.picker-off:hover{background-color:#eee;color:#bbb;cursor:default}.picker-day.picker-empty,.picker-day.picker-empty:hover{background-color:#fafafa;cursor:default}
+.text-center {
+    text-align: center
+}
+
+.multiple-date-picker {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none
+}
+
+.multiple-date-picker,
+.picker-days-row,
+.picker-days-week-row,
+.picker-top-row {
+    width: 100%
+}
+
+.picker-top-row>div {
+    display: inline-block
+}
+
+.picker-navigate {
+    width: 16.66%
+}
+
+.picker-navigate:hover {
+    cursor: pointer
+}
+
+.picker-navigate.disabled,
+.picker-navigate.disabled:hover {
+    color: #ddd;
+    cursor: default;
+
+    /*reset*/
+    visibility: hidden;
+}
+
+.picker-month {
+    width: 66.66%
+}
+
+.picker-days-row>div,
+.picker-days-week-row>div {
+    width: 14.28%;
+    display: inline-block
+}
+
+.picker-day,
+.picker-top-row {
+    padding: 7px 0
+}
+
+.picker-day {
+    background-color: #fff;
+    border: 1px solid #eee;
+    box-sizing: border-box;
+    color: #000;
+
+    /*reset*/
+    border: none;
+}
+
+.picker-day.today,
+.picker-day.today.picker-off,
+.picker-day.today.picker-off:hover,
+.picker-day.today.picker-selected,
+.picker-day.today:hover {
+    color: #00a3ff;
+}
+
+/*.picker-day:not(.picker-off):not(.picker-empty):hover .txt{
+    background-color: #ccc;
+    color: #fff;
+    cursor: pointer;
+
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}*/
+
+.picker-day .txt{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: inline-block;
+    line-height: 30px;
+}
+
+.picker-day.picker-selected .txt{
+    background-color: #fb5a4a;
+    color: #fff;
+
+    /*reset*/
+    border: none;
+}
+.picker-empty.picker-selected .txt{
+    visibility: hidden;
+}
+
+.picker-day.picker-off,
+.picker-day.picker-off:hover {
+    background-color: #fff;
+    color: #bbb;
+    cursor: default
+}
+
+.picker-day.picker-empty,
+.picker-day.picker-empty:hover {
+    cursor: default
+}

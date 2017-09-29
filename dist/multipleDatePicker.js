@@ -142,8 +142,8 @@
                 '<div class="picker-top-row">' +
                 '<div class="text-center picker-navigate picker-navigate-left-arrow" ng-class="{\'disabled\':disableBackButton}" ng-click="changeMonth($event, disableBackButton, -1)">&lt;</div>' +
                 '<div class="text-center picker-month">' +
-                '{{monthToDisplay}} ' +
-                '<span ng-if="yearsForSelect.length < 2">{{yearToDisplay}}</span>' +
+                '<span ng-if="yearsForSelect.length < 2">{{yearToDisplay}}年</span>' +
+                '{{monthShortToDisplay}}月' +
                 '<select ng-if="yearsForSelect.length > 1" ng-model="year" ng-change="changeYear(year)" ng-options="y for y in yearsForSelect"></select>' +
                 '</div>' +
                 '<div class="text-center picker-navigate picker-navigate-right-arrow" ng-class="{\'disabled\':disableNextButton}" ng-click="changeMonth($event, disableNextButton, 1)">&gt;</div>' +
@@ -152,7 +152,7 @@
                 '<div class="text-center" ng-repeat="day in daysOfWeek">{{day}}</div>' +
                 '</div>' +
                 '<div class="picker-days-row">' +
-                '<div class="text-center picker-day {{getDayClasses(day)}}" title="{{day.title}}" ng-repeat="day in days" ng-click="toggleDay($event, day)" ng-mouseover="hoverDay($event, day)" ng-mouseleave="dayHover($event, day)" mdp-right-click="rightClicked($event,day)">{{day ? day.mdp.otherMonth && !showDaysOfSurroundingMonths ? \'&nbsp;\' : day.date.format(\'D\') : \'\'}}</div>' +
+                '<div class="text-center picker-day {{getDayClasses(day)}}" title="{{day.title}}" ng-repeat="day in days" ng-click="toggleDay($event, day)" mdp-right-click="rightClicked($event,day)"><span ng-if="day" class="txt">{{day ? day.mdp.otherMonth && !showDaysOfSurroundingMonths ? \'&nbsp;\' : day.date.format(\'D\') : \'\'}}</span></div>' +
                 '</div>' +
                 '</div>',
                 link: function (scope) {
@@ -163,7 +163,8 @@
 
                     /*utility functions*/
                     var checkNavigationButtons = function () {
-                            var today = moment(),
+                            // var today = moment(),
+                            var today = moment(scope.month), // 取服务端时间
                                 previousMonth = moment(scope.month).subtract(1, 'month'),
                                 nextMonth = moment(scope.month).add(1, 'month');
                             scope.disableBackButton = scope.disableNavigation || (scope.disallowBackPastMonths && today.isAfter(previousMonth, 'month'));
@@ -189,6 +190,11 @@
                         getMonthYearToDisplay = function () {
                             var month = scope.month.format('MMMM');
                             return month.charAt(0).toUpperCase() + month.slice(1);
+                        },
+                        getMonthYearShortToDisplay = function() {
+                            var month = scope.month.format('MM');
+                            return month.charAt(0).toUpperCase() + month.slice(1);
+
                         },
                         getYearsForSelect = function () {
                             var now = moment(),
@@ -264,6 +270,7 @@
                             scope.month.locale(newLocale);
                             scope.daysOfWeek = getDaysOfWeek();
                             scope.monthToDisplay = getMonthYearToDisplay();
+                            scope.monthShortToDisplay = getMonthYearShortToDisplay();
                         }, true)
                     );
 
@@ -305,8 +312,13 @@
                             scope.dayClick(event, day);
                         }
 
+                        // todo
+                        return false;
+
                         if (day.selectable && !prevented) {
+
                             day.mdp.selected = !day.mdp.selected;
+
                             if (day.mdp.selected) {
                                 scope.ngModel.push(day.date);
                             } else {
@@ -456,6 +468,7 @@
                         scope.year = scope.month.year().toString();
                         scope.yearsForSelect = getYearsForSelect();
                         scope.monthToDisplay = getMonthYearToDisplay();
+                        scope.monthShortToDisplay = getMonthYearShortToDisplay();
                         scope.yearToDisplay = scope.month.format('YYYY');
                         var previousDay = moment(scope.month).date(0).day(scope.sundayFirstDay ? 0 : 1).subtract(1, 'day');
 
