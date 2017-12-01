@@ -279,8 +279,16 @@
                             watches[i]();
                         }
                     });
+
                     //default values
-                    scope.month = scope.month || moment().startOf('day');
+                    // scope.month = scope.month || moment().startOf('day');
+                    
+                    // todo by tim
+                    if(scope.month) {
+                        window.doMonth = scope.month;
+                    }
+                    scope.month = window.doMonth;
+
                     scope.days = [];
                     scope.weekDaysOff = scope.weekDaysOff || [];
                     scope.daysOff = scope.daysOff || [];
